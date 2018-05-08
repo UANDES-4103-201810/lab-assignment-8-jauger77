@@ -68,6 +68,27 @@ class UsersController < ApplicationController
       render "forbidden"
     end
   end
+  def admin_users
+    @user = User.find(params[:id])
+    @users = User.all
+    unless @user.role?
+      render "forbidden"
+    end
+  end
+  def admin_products
+    @user = User.find(params[:id])
+    @products = Product.all
+    unless @user.role?
+      render "forbidden"
+    end
+  end
+  def admin_user_products
+    @user = User.find(params[:id])
+    @products = Product.where(user_id: params[:id2])
+    unless @user.role?
+      render "forbidden"
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

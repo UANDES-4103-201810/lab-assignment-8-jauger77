@@ -8,27 +8,23 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
-	  <div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
+    <% if @user.present? %>
+		<% if @user.id.present? %>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
 		
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav">
-		    <li><%= link_to "Profile", @user %></li>
-				<% if @user.present? %>
-					<li><%= link_to "My Products",  user_products_path(@user.id) %></li>
-					<% if @user.role %>
-					<li><%= link_to "All Users",  users_path %></li>
-					<li><%= link_to "All Products",  products_path %></li>
-					<% end %>
-				<% else %>
-					<li><%= link_to "My Products" %></li>
-				<% end %>
-		  </ul>
-		</div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav">
+				<li><%= link_to "Profile", @user %></li>
+				<li><%= link_to "My Products",  user_products_path(@user.id) %></li>
+			  </ul>
+			</div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		<% end %>
+	<% end %>
     <%= yield %>
   </body>
 </html>

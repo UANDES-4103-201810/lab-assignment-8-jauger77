@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="container-fluid">
+  <div class="col-md-3">
+    <h2>Administration</h2>
+    <li><%= link_to "All Users", admin_users_path %></li>
+    <li><%= link_to "All Products", admin_products_path %></li>
+  </div>
+  <div class="col-md-6">
+  <h3>Users</h3>
+	<table class="table table-bordered">
+	  <thead>
+	    <tr>
+	      <th>First name</th>
+	      <th>Last name</th>
+	      <th>Username</th>
+	      <th>Role</th>
+	      <th colspan="4"> Options</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @users.each do |user| %>
+	      <tr>
+		<td><%= user.first_name %></td>
+		<td><%= user.last_name %></td>
+		<td><%= user.username %></td>
+		<td><%= user.role %></td>
+		<td><%= link_to 'Show', user %></td>
+		<td><%= link_to 'Edit', edit_user_path(user) %></td>
+		<td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to 'Products', admin_user_products_path(:id2=>user.id) %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+  </div>
+</div>
+
+
+

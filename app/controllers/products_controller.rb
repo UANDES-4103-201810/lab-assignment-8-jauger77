@@ -4,7 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    if params[:user_id].present?
+    @products = Product.where("user_id = ?", params[:user_id])
+    else
     @products = Product.all
+    end
   end
 
   # GET /products/1
@@ -61,6 +65,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def user_products
+    @products = Product.where(params[:id])
+    unless @user.role?
+      render "forbidden"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -69,6 +80,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :weight, :price, :user_id_id)
+      params.require(:product).permit(:name, :weight, :price, :user_id)
     end
 end
